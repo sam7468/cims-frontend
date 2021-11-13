@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import CollapsibleSidebar from './Collapsible-Sidebar'
-import Sidebar from './Sidebar';
+import CollapsibleSidebar from './components/Collapsible-Sidebar'
+import CreateForm from './components/ClientCreation-Form';
+
 function App() {
   return (
     <div>
-      {false && <Sidebar/>}
-      <CollapsibleSidebar/>
+      {true&&<CollapsibleSidebar/>}
+      <CreateForm/>
     </div>
   );
 }
