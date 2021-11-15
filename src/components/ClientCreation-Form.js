@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { fabClasses, TextField, Typography } from '@mui/material'
+import {   TextField, Typography } from '@mui/material'
 import { makeStyles } from '@material-ui/styles';
-import '../styles/FormStyle.css'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,6 +9,7 @@ import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Button } from '@mui/material';
 import Switch from '@mui/material/Switch';
+import '../styles/FormStyle.css'
 
 const useStyles = makeStyles({
     
@@ -40,9 +40,43 @@ function CreateForm(){
         clientname:"",
         domain:"",
         baselocation:"",
-        companyaddress:""
+        companyaddress:"",
+        primarycontact:{
+            title:"",
+            firstname:"",
+            lastname:"",
+            email:"",
+            contact_number:"",
+            othercontact_number:"",
+        },
+        secondarycontact:{
+            title:"",
+            firstname:"",
+            lastname:"",
+            email:"",
+            contact_number:"",
+            othercontact_number:"",
+        },
+        tertiarycontact:{
+            title:"",
+            firstname:"",
+            lastname:"",
+            email:"",
+            contact_number:"",
+            othercontact_number:"",
+        },
     })
     
+
+    const setformvalue=(e)=>{
+        let new_form = {...formData}
+        {e.target.id
+            ? new_form[e.target.id] = e.target.value
+            : new_form[e.target.name] = e.target.value
+          }
+        setformData(new_form)
+        console.log(new_form)
+    }
 
     return(
         <>
@@ -73,9 +107,11 @@ function CreateForm(){
                             className={classes.field1}
                             label="enter designation"
                             variant="outlined"
+                            id="designation"
                             fullWidth
                             required
                             size="small"
+                            onChange={(e)=>{setformvalue(e)}}
                             
                         />
                         <div className="align-form-fields">
@@ -86,9 +122,11 @@ function CreateForm(){
                                 className={classes.field2}
                                 label="enter name"
                                 variant="outlined"
+                                id="brandname"
                                 fullWidth
                                 required
                                 size="small"
+                                onChange={(e)=>{setformvalue(e)}}
                             />
                         </div>
 
@@ -100,9 +138,11 @@ function CreateForm(){
                                 className={classes.field2}
                                 label="enter domain/sector"
                                 variant="outlined"
+                                id="domain"
                                 fullWidth
                                 required
                                 size="small"
+                                onChange={(e)=>{setformvalue(e)}}
                             />
                         </div>
 
@@ -114,9 +154,11 @@ function CreateForm(){
                                 className={classes.field2}
                                 label="enter location"
                                 variant="outlined"
+                                id="baselocation"
                                 fullWidth
                                 required
                                 size="small"
+                                onChange={(e)=>{setformvalue(e)}}
                             />
                         </div>
 
@@ -126,16 +168,14 @@ function CreateForm(){
                             </Typography>
                             <Box sx={{ minWidth: 120 }} className={classes.field2}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Client</InputLabel>
+                                <InputLabel id="label">Select a Client name</InputLabel>
                                 <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value="25"
-                                label="Age"
+                                name="clientname"
+                                onChange={(e)=>{setformvalue(e)}}
                                 size="small"
-                                input={<OutlinedInput label="xxxxxxx" />}
+                                input={<OutlinedInput label="Select a Client name" />}
                                 >
-                                    
+                                
                                 <MenuItem value={"client 1"}>client 1</MenuItem>
                                 <MenuItem value={"client 2"}>client 2</MenuItem>
                                 <MenuItem value={"client 3"}>client 3</MenuItem>
@@ -151,12 +191,19 @@ function CreateForm(){
                             className={classes.field3}
                             label="Enter location"
                             variant="outlined"
+                            id="companyaddress"
                             fullWidth
                             required
                             size="small"
+                            onChange={(e)=>{setformvalue(e)}}
                         />
                         
                     </form>
+                
+                    <div className="contact-form">
+                        contactform    
+                    </div>
+                
                 </div>
 
             </div>
