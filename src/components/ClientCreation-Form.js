@@ -11,8 +11,7 @@ import { Button } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import '../styles/FormStyle.css'
 
-const useStyles = makeStyles({
-    
+const useStyles = makeStyles({  
     field1:{
         width:'98%',
         margin:'1%'
