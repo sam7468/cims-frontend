@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cims-frontend/static/css/main.d8500842.chunk.css",
+    "main.js": "/cims-frontend/static/js/main.b4e625c2.chunk.js",
+    "main.js.map": "/cims-frontend/static/js/main.b4e625c2.chunk.js.map",
+    "runtime-main.js": "/cims-frontend/static/js/runtime-main.e1483cd2.js",
+    "runtime-main.js.map": "/cims-frontend/static/js/runtime-main.e1483cd2.js.map",
+    "static/js/2.9bd2383d.chunk.js": "/cims-frontend/static/js/2.9bd2383d.chunk.js",
+    "static/js/2.9bd2383d.chunk.js.map": "/cims-frontend/static/js/2.9bd2383d.chunk.js.map",
+    "static/js/3.23b52c21.chunk.js": "/cims-frontend/static/js/3.23b52c21.chunk.js",
+    "static/js/3.23b52c21.chunk.js.map": "/cims-frontend/static/js/3.23b52c21.chunk.js.map",
+    "index.html": "/cims-frontend/index.html",
+    "static/css/main.d8500842.chunk.css.map": "/cims-frontend/static/css/main.d8500842.chunk.css.map",
+    "static/js/2.9bd2383d.chunk.js.LICENSE.txt": "/cims-frontend/static/js/2.9bd2383d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e1483cd2.js",
+    "static/js/2.9bd2383d.chunk.js",
+    "static/css/main.d8500842.chunk.css",
+    "static/js/main.b4e625c2.chunk.js"
+  ]
+}
