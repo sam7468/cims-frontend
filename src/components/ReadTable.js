@@ -64,13 +64,12 @@ function createData(id, company_uid, company_name, primary_contact, action ) {
   return { id, company_uid, company_name, primary_contact, action };
 }
 
-const rows = [
-  createData(1, "PQ127z", "Raymond Tech. Pvt. Ltd.", "Jhon Dave", EditButton()),
-  createData(2, "YTr780", "Vimsl & Co.", "Vimal K", EditButton()),
-  createData(3, "WY584p", "Bend Solution", "Harsha Bendi", EditButton()),
-  createData(4, "CB456u", "Alpha Inc", "Naman K", EditButton()),
-  createData(5, "Eh23yu", "Meta Inc", "Sunny B", EditButton()),
-  
+const clientsList = [
+  createData(1, "PQ127z", "Raymond Tech. Pvt. Ltd.", "Jhon Dave" ),
+  createData(2, "YTr780", "Vimsl & Co.", "Vimal K"),
+  createData(3, "WY584p", "Bend Solution", "Harsha Bendi"),
+  createData(4, "CB456u", "Alpha Inc", "Naman K"),
+  createData(5, "Eh23yu", "Meta Inc", "Sunny B"), 
 ];
 
 function CIMSTable() {
@@ -89,15 +88,15 @@ function CIMSTable() {
             </TableRow>
             </TableHead>
             <TableBody>
-            {rows.map((row) => (
-                <StyledTableRow key={row.id}>
-                <StyledTableCell component="th" scope="row">
-                    {row.id}
+            {clientsList.map((client) => (
+                <StyledTableRow key={client.id}>
+                <StyledTableCell component="th" scope="client">
+                    {client.id}
                 </StyledTableCell>
-                <StyledTableCell align="left">{row.company_uid}</StyledTableCell>
-                <StyledTableCell align="left">{row.company_name}</StyledTableCell>
-                <StyledTableCell align="left">{row.primary_contact}</StyledTableCell>
-                <StyledTableCell align="left">{row.action}</StyledTableCell>
+                <StyledTableCell align="left">{client.company_uid}</StyledTableCell>
+                <StyledTableCell align="left">{client.company_name}</StyledTableCell>
+                <StyledTableCell align="left">{client.primary_contact}</StyledTableCell>
+                <StyledTableCell align="left">{EditButton()}</StyledTableCell>
                 </StyledTableRow>
             ))}
             </TableBody>

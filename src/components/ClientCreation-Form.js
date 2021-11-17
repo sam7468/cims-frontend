@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography } from '@mui/material'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/styles';
@@ -30,6 +30,24 @@ const useStyles = makeStyles({
 })
 
 function CreateForm(){
+
+    const [store,setStore] = useState("")
+    const [login,setLogin] = useState(true)
+
+    useEffect(() =>{
+        authStore()
+    },[])
+
+    const authStore= ()=>{
+
+        let store = localStorage.getItem('token')
+        if(store && login)
+        {setLogin(true)
+         setStore(store) 
+         console.log(store)  
+        }   
+    }
+
     const classes = useStyles()
     const url = "http://localhost:4000//submitform"
     const [anchorEl, setAnchorEl] = useState(null);
@@ -159,8 +177,14 @@ function CreateForm(){
     
     const submitForm = async(e) =>{
         console.log(formData)
+        let token = "Bearer "+ store
         // try {
-        //     await Axios.post(url , {formData}) 
+        //     await Axios.post(url , {
+        //                            headers: {
+        //                            'Authorization': 'token'
+        //                            },
+        //                            formData
+        //                             }) 
         //     .then(res=>console.log(res))   
         // } catch (error) {
         //     console.log(error)
