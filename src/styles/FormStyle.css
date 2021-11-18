@@ -34,12 +34,16 @@
     align-items: center;
 }
 
-#save-btn{
+#save-btn,#cancel-btn{
     position: absolute;
     top:0;
     right: 0;
     margin-right: 20%;
     margin-top: 1%;
+}
+
+#cancel-btn{
+    margin-right: 28%;
 }
 
 .form-body{
