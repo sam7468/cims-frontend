@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 function CreateForm(){
 
     const classes = useStyles()
-    const url = "http://localhost:4000//submitform"
+    const url = "http://localhost:4000/cims"
     const [formData,setformData] = useState({
         designation:"",
         brandname:"",
@@ -77,15 +77,13 @@ function CreateForm(){
         console.log(new_form)
     }
 
-    const submitForm = async(e) =>{
-        e.preventDefault()
-        console.log(formData)
-        // try {
-        //     await Axios.post(url , {formData}) 
-        //     .then(res=>console.log(res))   
-        // } catch (error) {
-        //     console.log(error)
-        // }
+    const submitForm = async() =>{
+        try {
+            await axios.post(url , {formData}) 
+            .then(res=>console.log(res))   
+        } catch (error) {
+            console.log(error)
+        }
            
     }
 

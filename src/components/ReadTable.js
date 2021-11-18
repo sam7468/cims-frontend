@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState,useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,28 +9,16 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@mui/icons-material/Edit";
+import axios from 'axios'
 import '../styles/FormStyle.css'
+import { Sync } from "@mui/icons-material";
 
 
 
-
-//todo
-
-{/*
-
-    sprint 1 todo
-    - remove preventdefault for form
-    - read table - logics
-    x - routing
-    x - integrate with backend
-
-
-    table overflow
-    logic for => edit action, clicking on specific user
-    axios get request fn
-*/}
 
 function EditButton() {
+
+
   return (
     <div>
       <Button variant="fab" color="purple" endIcon={<EditIcon />}>
@@ -60,19 +48,35 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(id, company_uid, company_name, primary_contact, action ) {
-  return { id, company_uid, company_name, primary_contact, action };
-}
-
-const clientsList = [
-  createData(1, "PQ127z", "Raymond Tech. Pvt. Ltd.", "Jhon Dave" ),
-  createData(2, "YTr780", "Vimsl & Co.", "Vimal K"),
-  createData(3, "WY584p", "Bend Solution", "Harsha Bendi"),
-  createData(4, "CB456u", "Alpha Inc", "Naman K"),
-  createData(5, "Eh23yu", "Meta Inc", "Sunny B"), 
-];
+// function createData(id, company_uid, company_name, primary_contact, action ) {
+//   return { id, company_uid, company_name, primary_contact, action };
+// }
 
 function CIMSTable() {
+
+  
+  const [clientsList,setclientsList] = useState([])
+  
+  useEffect(async()=>{
+    await axios.post('http://localhost:4000/login')
+    .then(data=>data)
+    .then(tokenObject=>{
+      console.log(tokenObject.data.Token)
+      localStorage.setItem('authorization',tokenObject.data.Token)
+    })
+
+    const token = localStorage.getItem('authorization')
+    await axios.get('http://localhost:4000/cims', {headers: {
+                                                      'authorization': `bearer ${token}`
+                                                      }})
+    .then(data=>data)
+    .then(list=>{
+      setclientsList(list.data)
+      console.log(list.data)
+    })
+  },[])
+
+  
   return (
 
     <div className="FormContainer"> {/*//using form container's alignment*/}
@@ -88,14 +92,14 @@ function CIMSTable() {
             </TableRow>
             </TableHead>
             <TableBody>
-            {clientsList.map((client) => (
+            {clientsList.map((client,idx) => (
                 <StyledTableRow key={client.id}>
                 <StyledTableCell component="th" scope="client">
-                    {client.id}
+                    {idx+1}
                 </StyledTableCell>
-                <StyledTableCell align="left">{client.company_uid}</StyledTableCell>
-                <StyledTableCell align="left">{client.company_name}</StyledTableCell>
-                <StyledTableCell align="left">{client.primary_contact}</StyledTableCell>
+                <StyledTableCell align="left">{client._id}</StyledTableCell>
+                <StyledTableCell align="left">{client.brandname}</StyledTableCell>
+                <StyledTableCell align="left">{client.contacts.primaryContact.title}</StyledTableCell>
                 <StyledTableCell align="left">{EditButton()}</StyledTableCell>
                 </StyledTableRow>
             ))}

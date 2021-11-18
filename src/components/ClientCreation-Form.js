@@ -8,7 +8,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Switch from '@mui/material/Switch';
 import { Box, Tab, Grid, TextField, Button, MenuItem, Menu, FormControl } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { KeyboardArrowDownRounded as KeyboardArrowDownRoundedIcon } from '@mui/icons-material';
+import { KeyboardArrowDownRounded as KeyboardArrowDownRoundedIcon,
+    AddRounded as AddRoundedIcon
+} from '@mui/icons-material';
 import '../styles/FormStyle.css'
 
 const useStyles = makeStyles({  
@@ -23,10 +25,7 @@ const useStyles = makeStyles({
         width:'78%',
         margin:'1%'
     },
-    lables:{
-        marginLeft:'1%',
-        marginTop:'1%'
-    }
+
 })
 
 function CreateForm(){
@@ -40,7 +39,7 @@ function CreateForm(){
 
     const authStore= ()=>{
 
-        let store = localStorage.getItem('token')
+        let store = localStorage.getItem('authorization')
         if(store && login)
         {setLogin(true)
          setStore(store) 
@@ -49,7 +48,7 @@ function CreateForm(){
     }
 
     const classes = useStyles()
-    const url = "http://localhost:4000//submitform"
+    const url = "http://localhost:4000/cims"
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);     
     const handleClick = (event) => {
@@ -74,6 +73,8 @@ function CreateForm(){
     };
     const [contacts, setContacts] = useState(initialContacts);
 
+    //
+    const [addOthers, setAddOthers] = useState(true);
 
     const [formData,setformData] = useState({
         designation:"",
@@ -134,6 +135,17 @@ function CreateForm(){
         console.log(new_form)
     }
 
+    const handleAddOthers = () => {
+        let new_form = {...formData}
+        new_form['contacts'] = {...new_form['contacts'], [`otherContact${n-2}`]:{...contactSchema}};
+        const d = {label: `Other Contact ${n-2}`, title: `otherContact${n-2}`}
+        setformData(new_form)
+        setContacts([...initialContacts, {...d}]);
+        setValue(d.title);
+        setN(Object.keys(new_form.contacts).length);
+        setAddOthers(true)
+    };
+
     const fields = [
         {id: 'title', label: 'Title'},
         {id: 'firstName', label: 'First name'},
@@ -176,19 +188,20 @@ function CreateForm(){
     };
     
     const submitForm = async(e) =>{
+        e.preventDefault()
         console.log(formData)
-        let token = "Bearer "+ store
-        // try {
-        //     await Axios.post(url , {
-        //                            headers: {
-        //                            'Authorization': 'token'
-        //                            },
-        //                            formData
-        //                             }) 
-        //     .then(res=>console.log(res))   
-        // } catch (error) {
-        //     console.log(error)
-        // }      
+        // let token = "Bearer "+ store
+        const token = localStorage.getItem('authorization')
+        try {
+            await axios.post(url , {
+                                    formData,    
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'authorization': `bearer ${token}`}}) 
+            .then(res=>console.log(res))   
+        } catch (error) {
+            console.log(error)
+        }      
     }
 
     const tabs = contacts.map(contact =>
@@ -329,6 +342,8 @@ function CreateForm(){
                             <Box sx={{ borderTop: 2, borderBottom: 2, borderColor: 'divider' }}>
                                 <TabList onChange={(e, newValue) => setValue(newValue)}>
                                     {tabs}
+
+                                    <Grid>
                                     <FormControl size="small">
                                         <Button 
                                             size="small" 
@@ -366,6 +381,18 @@ function CreateForm(){
                                             })}
                                         </Menu>
                                     </FormControl>
+                                    </Grid>            
+                                    <Grid container>
+                                        <Button
+                                            id="addOthersBtn" 
+                                            sx={{color: 'gray', borderColor: 'white'}} 
+                                            variant={addOthers?"contained":"outlined"}
+                                            onClick={handleAddOthers}
+                                            disabled={addOthers}
+                                        >
+                                            <AddRoundedIcon sx={{fontSize: "2rem"}} />
+                                        </Button>
+                                    </Grid>
                                 </TabList>
                             </Box>
                             <TabPanel value={value}>
