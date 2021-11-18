@@ -193,11 +193,10 @@ function CreateForm(){
         // let token = "Bearer "+ store
         const token = localStorage.getItem('authorization')
         try {
-            await axios.post(url , {
-                                    formData,    
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'authorization': `bearer ${token}`}}) 
+            await axios.post('http://localhost:4000/cims', {formData},  
+                                                    {headers: {
+                                                        'authorization': `bearer ${token}`
+                                                        }}) 
             .then(res=>console.log(res))   
         } catch (error) {
             console.log(error)
