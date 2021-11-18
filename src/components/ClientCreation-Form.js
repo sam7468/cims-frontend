@@ -168,86 +168,93 @@ function CreateForm(){
                             { error: true, helperText: errors.designation })}
                             
                         />
-                        <div className="align-form-fields">
-                            <Typography>
-                                Brand Name
-                            </Typography>
-                            <TextField
-                                className={classes.field2}
-                                label="enter name"
-                                variant="outlined"
-                                name="brandname"
-                                fullWidth
-                                required
-                                size="small"
-                                onChange={(e)=>{setformvalue(e)}}
-                                onBlur={(e)=>{setformvalue(e)}}
-                                {...(errors.brandname && 
-                                { error: true, helperText: errors.brandname })}
-                            />
-                        </div>
+                        <Grid container spacing={2} >
+                                <Grid container item xs={6} direction="column" >            
+                                    <div >
+                                        <Typography>
+                                            Brand Name
+                                        </Typography>
+                                        <TextField
+                                            className={classes.field2}
+                                            label="enter name"
+                                            variant="outlined"
+                                            name="brandname"
+                                            fullWidth
+                                            required
+                                            size="small"
+                                            onChange={(e)=>{setformvalue(e)}}
+                                            onBlur={setformvalue}
+                                            {...(errors.brandname && 
+                                            { error: true, helperText: errors.brandname })}
+                                        />
+                                    </div>
 
-                        <div className="right-float-fields">
-                            <Typography>
-                                Domain/Sector
-                            </Typography>
-                            <TextField
-                                className={classes.field2}
-                                label="enter domain/sector"
-                                variant="outlined"
-                                name="domain"
-                                fullWidth
-                                required
-                                size="small"
-                                onChange={(e)=>{setformvalue(e)}}
-                                onBlur={(e)=>{setformvalue(e)}}
-                                {...(errors.domain && 
-                                { error: true, helperText: errors.domain })}
-                            />
-                        </div>
+                                    <div >
+                                    <Typography>
+                                        Base Location
+                                    </Typography>
+                                    <TextField
+                                        className={classes.field2}
+                                        label="enter location"
+                                        variant="outlined"
+                                        name="baselocation"
+                                        fullWidth
+                                        required
+                                        size="small"
+                                        onChange={(e)=>{setformvalue(e)}}
+                                        onBlur={setformvalue}
+                                        {...(errors.baselocation && 
+                                        { error: true, helperText: errors.baselocation })}
+                                    />
+                                </div>     
+                                </Grid>
 
-                        <div className="align-form-fields">
-                            <Typography>
-                                Base Location
-                            </Typography>
-                            <TextField
-                                className={classes.field2}
-                                label="enter location"
-                                variant="outlined"
-                                name="baselocation"
-                                fullWidth
-                                required
-                                size="small"
-                                onChange={(e)=>{setformvalue(e)}}
-                                onBlur={(e)=>{setformvalue(e)}}
-                                {...(errors.baselocation && 
-                                { error: true, helperText: errors.baselocation })}
-                            />
-                        </div>
+                            <Grid container item xs={6} direction="column" >                        
+                                
+                                <div >
+                                    <Typography>
+                                        Domain/Sector
+                                    </Typography>
+                                    <TextField
+                                        className={classes.field2}
+                                        label="enter domain/sector"
+                                        variant="outlined"
+                                        name="domain"
+                                        fullWidth
+                                        required
+                                        size="small"
+                                        onChange={(e)=>{setformvalue(e)}}
+                                        onBlur={setformvalue}
+                                        {...(errors.domain && 
+                                        { error: true, helperText: errors.domain })}
+                                    />
+                                </div>
 
-                        <div className="right-float-fields">
-                            <Typography>
-                                Active Client
-                            </Typography>
-                            <Box sx={{ minWidth: 120 }} className={classes.field2}>
-                            <FormControl fullWidth>
-                                <InputLabel id="label">Select a Client name</InputLabel>
-                                <Select
-                                name="clientname"
-                                onChange={(e)=>{setformvalue(e)}}
-                                onBlur={(e)=>{setformvalue(e)}}
-                                {...(errors.clientname && 
-                                { error: true, helperText: errors.clientname })}
-                                size="small"
-                                input={<OutlinedInput label="Select a Client name" />}
-                                >
-                                <MenuItem value={"client 1"}>client 1</MenuItem>
-                                <MenuItem value={"client 2"}>client 2</MenuItem>
-                                <MenuItem value={"client 3"}>client 3</MenuItem>
-                                </Select>
-                            </FormControl>
-                            </Box>
-                        </div>
+                                <div >
+                                    <Typography>
+                                        Active Client
+                                    </Typography>
+                                    <Box sx={{ minWidth: 120 }} className={classes.field2}>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="label">Select a Client name</InputLabel>
+                                        <Select
+                                        name="clientname"
+                                        onChange={setformvalue}
+                                        onBlur={(e)=>{setformvalue(e)}}
+                                        {...(errors.clientname && 
+                                        { error: true, helperText: errors.clientname })}
+                                        size="small"
+                                        input={<OutlinedInput label="Select a Client name" />}
+                                        >
+                                        <MenuItem value={"client 1"}>client 1</MenuItem>
+                                        <MenuItem value={"client 2"}>client 2</MenuItem>
+                                        <MenuItem value={"client 3"}>client 3</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    </Box>
+                                </div>
+                            </Grid>
+                        </Grid>
 
                         <Typography className={classes.lables}>
                             Complete address of the company
@@ -261,7 +268,7 @@ function CreateForm(){
                             fullWidth
                             required
                             size="small"
-                            onChange={(e)=>{setformvalue(e)}}
+                            onChange={setformvalue}
                             onBlur={(e)=>{setformvalue(e)}}
                             {...(errors.companyaddress && 
                             { error: true, helperText: errors.companyaddress })}

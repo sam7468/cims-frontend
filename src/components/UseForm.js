@@ -165,20 +165,23 @@ export default function UseForm() {
         console.log(fieldValues.designation)
         console.log("designation" in fieldValues)
         if ("designation" in fieldValues)
-            temp["designation"] = fieldValues.designation
+            temp["designation"] = fieldValues.designation ? "" : "This field is required."
         if ("brandname" in fieldValues)
-            temp.brandname = fieldValues.brandname ? "" : "This field is required."
+            temp["brandname"] = fieldValues.brandname ? "" : "This field is required."
         if ("clientname" in fieldValues)
-            temp.clientname = fieldValues.clientname ? "" : "This field is required."
+            temp["clientname"] = fieldValues.clientname ? "" : "This field is required."
         if ("domain" in fieldValues)
-            temp.domain = fieldValues.domain ? "" : "This field is required."
+            temp["domain"] = fieldValues.domain ? "" : "This field is required."
         if ("baselocation" in fieldValues)
-            temp.baselocation = fieldValues.baselocation ? "" : "This field is required."
+            temp["baselocation"] = fieldValues.baselocation ? "" : "This field is required."
         if ("companyaddress" in fieldValues)
-            temp.companyaddress = fieldValues.companyaddress ? "" : "This field is required."
-        setErrors(
-            temp);
-        console.log(temp)
+            temp["companyaddress"] = fieldValues.companyaddress ? "" : "This field is required."
+        
+        setTimeout(() => {
+            setErrors({...temp})    
+        }, 100)
+        console.log("from temp",temp)
+        console.log("from errors",errors)
     }
 
     // End handel errors
@@ -194,6 +197,16 @@ export default function UseForm() {
             validateOptional(e.target.name, new_form['contacts'][e.target.name])
         if (e.target.name === 'designation' )
             validateBasic({ [e.target.name]: e.target.value })
+        if (e.target.name === 'brandname' )
+            validateBasic({ [e.target.name]: e.target.value })
+        if (e.target.name === 'domain' )
+            validateBasic({ [e.target.name]: e.target.value }) 
+        if (e.target.name === 'baselocation' )
+            validateBasic({ [e.target.name]: e.target.value })
+        if (e.target.name === 'companyaddress' )
+            validateBasic({ [e.target.name]: e.target.value })
+        if (e.target.name === 'clientname' )
+            validateBasic({ [e.target.name]: e.target.value })            
 
         if (validateOptional('tertiaryContact', new_form['contacts']['tertiaryContact'])){
             if(n===3 ? true : (validateOptional(`otherContact${n-3}`, new_form.contacts[`otherContact${n-3}`]) &&
